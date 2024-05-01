@@ -20,7 +20,7 @@ module TestGuru
     #
     config.time_zone = 'Amsterdam'
     config.active_record.default_timezone = :local
-    config.i18n.default_locale = :ru
+    config.i18n.default_locale = :en
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
