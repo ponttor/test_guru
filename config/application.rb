@@ -18,7 +18,7 @@ module TestGuru
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = 'Central Europe'
+    config.time_zone = 'Amsterdam'
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ru
     # config.eager_load_paths << Rails.root.join("extras")
