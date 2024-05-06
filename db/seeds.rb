@@ -11,12 +11,12 @@ Category.create(title: 'Machine Learning')
 
 # create tests
 tests = Test.create([
-                      { title: 'HTML', level: 1, category: category1, user: user1 },
-                      { title: 'Ruby', level: 2, category: category2, user: user1 },
-                      { title: 'Neural Networks', level: 3, category: category2, user: user1 },
-                      { title: 'CSS', level: 1, category: category1, user: user1 },
-                      { title: 'React', level: 1, category: category1, user: user1 },
-                      { title: 'Redux', level: 1, category: category1, user: user1 }
+                      { title: 'HTML', level: 1, category: category1, user: user1, state: Test::NEW },
+                      { title: 'Ruby', level: 2, category: category2, user: user1, state: Test::IN_PROGRESS },
+                      { title: 'Neural Networks', level: 3, category: category2, user: user1, state: Test::NEW },
+                      { title: 'CSS', level: 1, category: category1, user: user1, state: Test::IN_PROGRESS },
+                      { title: 'React', level: 1, category: category1, user: user1, state: Test::COMPLETED },
+                      { title: 'Redux', level: 1, category: category1, user: user1, state: Test::COMPLETED }
                     ])
 
 # create questions

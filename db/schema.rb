@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_240_504_105_555) do
+ActiveRecord::Schema.define(version: 20_240_504_106_776) do
   create_table 'answers', force: :cascade do |t|
     t.boolean 'correct', default: false
     t.integer 'question_id'
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20_240_504_105_555) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.integer 'user_id'
+    t.string 'state'
     t.index ['category_id'], name: 'index_tests_on_category_id'
     t.index ['user_id'], name: 'index_tests_on_user_id'
   end
