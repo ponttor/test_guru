@@ -1,26 +1,22 @@
 # frozen_string_literal: true
 
 # create users
-User.create([
-              { first_name: 'John', last_name: 'Jackson' },
-              { first_name: 'Jack', last_name: 'Johnon' }
-            ])
+user1 = User.create(first_name: 'John', last_name: 'Jackson')
+User.create(first_name: 'Jack', last_name: 'Johnon')
 
 # create categories
-categories = Category.create([
-                               { title: 'Frontend' },
-                               { title: 'Backend' },
-                               { title: 'Machine Learning' }
-                             ])
+category1 = Category.create(title: 'Frontend')
+category2 = Category.create(title: 'Backend')
+Category.create(title: 'Machine Learning')
 
 # create tests
 tests = Test.create([
-                      { title: 'HTML', level: 1, category: categories[0], user: User.first },
-                      { title: 'Ruby', level: 2, category: categories[1], user: User.first },
-                      { title: 'Neural Networks', level: 3, category: categories[2], user: User.first },
-                      { title: 'CSS', level: 1, category: categories[0], user: User.first },
-                      { title: 'React', level: 1, category: categories[0], user: User.first },
-                      { title: 'Redux', level: 1, category: categories[0], user: User.first }
+                      { title: 'HTML', level: 1, category: category1, user: user1 },
+                      { title: 'Ruby', level: 2, category: category2, user: user1 },
+                      { title: 'Neural Networks', level: 3, category: category2, user: user1 },
+                      { title: 'CSS', level: 1, category: category1, user: user1 },
+                      { title: 'React', level: 1, category: category1, user: user1 },
+                      { title: 'Redux', level: 1, category: category1, user: user1 }
                     ])
 
 # create questions
