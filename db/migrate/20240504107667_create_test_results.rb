@@ -9,5 +9,6 @@ class CreateTestResults < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_index :test_results, %i[user_id test_id], unique: true
   end
 end
