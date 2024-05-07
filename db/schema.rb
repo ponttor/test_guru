@@ -12,12 +12,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_240_504_103_946) do
+ActiveRecord::Schema.define(version: 20_240_504_107_667) do
   create_table 'answers', force: :cascade do |t|
     t.boolean 'correct', default: false
     t.integer 'question_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.text 'body'
     t.index ['question_id'], name: 'index_answers_on_question_id'
   end
 
@@ -33,6 +34,16 @@ ActiveRecord::Schema.define(version: 20_240_504_103_946) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['test_id'], name: 'index_questions_on_test_id'
+  end
+
+  create_table 'test_results', force: :cascade do |t|
+    t.integer 'user_id', null: false
+    t.integer 'test_id', null: false
+    t.integer 'score'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['test_id'], name: 'index_test_results_on_test_id'
+    t.index ['user_id'], name: 'index_test_results_on_user_id'
   end
 
   create_table 'tests', force: :cascade do |t|
@@ -53,5 +64,7 @@ ActiveRecord::Schema.define(version: 20_240_504_103_946) do
 
   add_foreign_key 'answers', 'questions'
   add_foreign_key 'questions', 'tests'
+  add_foreign_key 'test_results', 'tests'
+  add_foreign_key 'test_results', 'users'
   add_foreign_key 'tests', 'categories'
 end
