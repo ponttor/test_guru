@@ -2,7 +2,7 @@
 
 # create users
 user1 = User.create(first_name: 'John', last_name: 'Jackson')
-User.create(first_name: 'Jack', last_name: 'Johnon')
+user2 = User.create(first_name: 'Jack', last_name: 'Johnson')
 
 # create categories
 category1 = Category.create(title: 'Frontend')
@@ -11,13 +11,24 @@ Category.create(title: 'Machine Learning')
 
 # create tests
 tests = Test.create([
-                      { title: 'HTML', level: 1, category: category1, user: user1, state: Test::NEW },
-                      { title: 'Ruby', level: 2, category: category2, user: user1, state: Test::IN_PROGRESS },
-                      { title: 'Neural Networks', level: 3, category: category2, user: user1, state: Test::NEW },
-                      { title: 'CSS', level: 1, category: category1, user: user1, state: Test::IN_PROGRESS },
-                      { title: 'React', level: 1, category: category1, user: user1, state: Test::COMPLETED },
-                      { title: 'Redux', level: 1, category: category1, user: user1, state: Test::COMPLETED }
+                      { title: 'HTML', level: 1, category: category1 },
+                      { title: 'Ruby', level: 2, category: category2 },
+                      { title: 'Neural Networks', level: 3, category: category2 },
+                      { title: 'CSS', level: 1, category: category1 },
+                      { title: 'React', level: 1, category: category1 },
+                      { title: 'Redux', level: 1, category: category1 }
                     ])
+
+# create test results
+TestResult.create([
+                    { test: tests.first, user: user1, score: 40 },
+                    { test: tests.second, user: user1, score: 50 },
+                    { test: tests.third, user: user1, score: 60 },
+                    { test: tests.fourth, user: user1, score: 70 },
+                    { test: tests.fifth, user: user1, score: 80 },
+                    { test: tests.fifth, user: user2, score: 80 },
+                    { test: tests.last, user: user2, score: 80 }
+                  ])
 
 # create questions
 questions = Question.create([
