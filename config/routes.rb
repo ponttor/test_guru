@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :tests do
-    resources :questions, controller: 'tests/questions'
+  namespace :api do
+    namespace :v1 do
+      resources :tests do
+        resources :questions, controller: 'tests/questions'
+      end
+    end
   end
 end

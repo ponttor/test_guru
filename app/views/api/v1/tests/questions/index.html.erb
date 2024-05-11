@@ -1,0 +1,11 @@
+<h1>Questions for Test <%= @current_test.title %></h1>
+<ul>
+  <% @questions.each do |question| %>
+    <li>
+      <%= question.body %> - 
+      <%= link_to 'Show', api_v1_test_question_path(@current_test, question) %> |
+      <%= link_to 'Delete', api_v1_test_question_path(@current_test, question), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to 'Add New Question', new_api_v1_test_question_path(@current_test) %>
