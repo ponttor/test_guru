@@ -21,20 +21,20 @@ tests = Test.create([
 
 # create test results
 TestResult.create([
-                    { test: tests.first, user: user1, score: 40 },
-                    { test: tests.second, user: user1, score: 50 },
-                    { test: tests.third, user: user1, score: 60 },
-                    { test: tests.fourth, user: user1, score: 70 },
-                    { test: tests.fifth, user: user1, score: 80 },
-                    { test: tests.fifth, user: user2, score: 80 },
-                    { test: tests.last, user: user2, score: 80 }
+                    { test: tests.first, user_id: user1.id, score: 40 },
+                    { test: tests.second, user_id: user1.id, score: 50 },
+                    { test: tests.third, user_id: user1.id, score: 60 },
+                    { test: tests.fourth, user_id: user1.id, score: 70 },
+                    { test: tests.fifth, user_id: user1.id, score: 80 },
+                    { test: tests.fifth, user_id: user2.id, score: 80 },
+                    { test: tests.last, user_id: user2.id, score: 80 }
                   ])
 
 # create questions
 questions = Question.create([
-                              { body: 'What is HTML?', test: tests[0] },
-                              { body: 'What is Ruby?', test: tests[1] },
-                              { body: 'What are neural networks?', test: tests[2] }
+                              { body: 'What is HTML?', test_id: tests[0].id },
+                              { body: 'What is Ruby?', test_id: tests[1].id },
+                              { body: 'What are neural networks?', test_id: tests[2].id }
                             ])
 
 # create correct answers

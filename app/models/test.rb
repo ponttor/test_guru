@@ -8,18 +8,19 @@ class Test < ApplicationRecord
   has_many :test_results
   has_many :users, through: :test_results
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: { scope: :level }
   validates :level, numericality: { only_integer: true }
-  validates :title, uniqueness: { scope: :level }
 
+  scope :by_level, ->(level) { where(level: level) }
   scope :simple, -> { where(level: 0..1) }
   scope :advanced, -> { where(level: 2..4) }
-  scope :master, -> { where('level >= ?', 5) }
-  scope :by_level, ->(level) { where(level:) }
+  scope :master, -> { by_level(5) }
+  scope :with_category, -> { joins(:category) }
 
-  scope :by_category, -> { |category_name|
-    joins(:category)
-      .where(categories: { title: category_name })
-      .order(title: :desc)
+  scope :by_category, ->(category_name) {
+    with_category.where(categories: { title: category_name })
+  }
+  scope :sorted_by_category_name, -> {
+    with_category.order('categories.title ASC')
   }
 end
