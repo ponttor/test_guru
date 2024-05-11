@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-module Api
-  module V1
-    module Tests
-      class QuestionsController < ApplicationController
+class Api::V1::Tests::QuestionsController < ApplicationController
         before_action :set_current_test
 
         rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
