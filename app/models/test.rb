@@ -11,11 +11,10 @@ class Test < ApplicationRecord
   validates :title, presence: true, uniqueness: { scope: :level }
   validates :level, numericality: { only_integer: true }
 
-  scope :by_level, ->(level) { where(level: level) }
-  scope :simple, -> { where(level: 0..1) }
-  scope :advanced, -> { where(level: 2..4) }
+  scope :by_level, ->(level) { where(level:) }
+  scope :simple, -> { by_level(0..1) }
+  scope :advanced, -> { by_level(2..4) }
   scope :master, -> { by_level(5) }
-  scope :with_category, -> { joins(:category) }
-  scope :by_category, ->(category_name) { with_category.where(categories: { title: category_name }) }
-  scope :sorted_by_categories, -> { with_category.order('categories.title ASC') }
+  scope :by_category, ->(category_name) { joins(:category).where(categories: { title: category_name }) }
+  scope :sorted_category_titles, -> { joins(:category).order('categories.title ASC').pluck('categories.title') }
 end

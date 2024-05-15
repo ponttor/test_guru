@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
-class Api::V1::Tests::QuestionsController < ApplicationController
-  before_action :set_current_test
+class QuestionsController < ApplicationController
+  before_action :current_test
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
   def index
-    @questions = current_test_questions
+    render inline: '<%= @current_test.questions.map(&:body).join("<br>") %>'
   end
 
   def show
-    @question = current_test_question
+    render inline: '<%= current_question.body %>'
   end
 
   def new
-    @question = current_test_questions.new
+    @question = current_test_questions.build
+    render :new
   end
 
   def create
@@ -29,11 +30,8 @@ class Api::V1::Tests::QuestionsController < ApplicationController
   end
 
   def destroy
-    if current_test_question.destroy
-      redirect_to(api_v1_test_questions_path(@current_test), notice: 'Question was successfully deleted.')
-    else
-      render :show, notice: 'Something went wrong'
-    end
+    @question.destroy
+    redirect_to api_v1_test_questions_path(@current_test), notice: 'Question was successfully deleted.'
   end
 
   private
@@ -46,12 +44,12 @@ class Api::V1::Tests::QuestionsController < ApplicationController
     @current_test.questions
   end
 
-  def current_test_question
-    current_test_questions.find(params[:id])
+  def current_question
+    @current_test.questions.find(params[:id])
   end
 
-  def set_current_test
-    @set_current_test ||= Test.find(params[:test_id])
+  def current_test
+    @current_test ||= Test.find(params[:test_id])
   end
 
   def rescue_with_question_not_found
