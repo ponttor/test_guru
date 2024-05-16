@@ -11,7 +11,7 @@ class Test < ApplicationRecord
   validates :title, presence: true, uniqueness: { scope: :level }
   validates :level, numericality: { only_integer: true }
 
-  scope :by_level, ->(level) { where(level:) }
+  scope :by_level, ->(level) { where(level: level) }
   scope :simple, -> { by_level(0..1) }
   scope :advanced, -> { by_level(2..4) }
   scope :master, -> { by_level(5) }
