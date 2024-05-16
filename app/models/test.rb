@@ -16,5 +16,4 @@ class Test < ApplicationRecord
   scope :advanced, -> { by_level(2..4) }
   scope :master, -> { by_level(5) }
   scope :by_category, ->(category_name) { joins(:category).where(categories: { title: category_name }) }
-  scope :sorted_category_titles, -> { joins(:category).order('categories.title ASC').pluck('categories.title') }
 end

@@ -3,9 +3,9 @@
   <% @questions.each do |question| %>
     <li>
       <%= question.body %> - 
-      <%= link_to 'Show', api_v1_test_question_path(@current_test, question) %> |
-      <%= link_to 'Delete', api_v1_test_question_path(@current_test, question), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Show', test_question_path(@current_test, question) %> |
+      <%= link_to 'Delete', test_question_path(@current_test, question), method: :delete, data: { confirm: 'Are you sure?' } %>
     </li>
   <% end %>
 </ul>
-<%= link_to 'Add New Question', new_api_v1_test_question_path(@current_test) %>
+<%= link_to 'Add New Question', new_test_question_path(@current_test) %>

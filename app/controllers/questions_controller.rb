@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    render inline: '<%= current_question.body %>'
+    render inline: '<%= @current_test.questions.find(params[:id]).body %>'
   end
 
   def new
@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
     @question = current_test_questions.build(questions_params)
 
     if @question.save
-      redirect_to(api_v1_test_question_url(@current_test, @question),
+      redirect_to(test_question_url(@current_test, @question),
                   notice: 'Question was successfully created.')
     else
       render :new
@@ -31,21 +31,17 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    redirect_to api_v1_test_questions_path(@current_test), notice: 'Question was successfully deleted.'
+    redirect_to test_questions_path(@current_test), notice: 'Question was successfully deleted.'
   end
 
   private
 
   def questions_params
-    params.require(:question).permit(:body)
+    params.require(:question).permit(:body, :test_id)
   end
 
   def current_test_questions
     @current_test.questions
-  end
-
-  def current_question
-    @current_test.questions.find(params[:id])
   end
 
   def current_test
