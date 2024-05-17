@@ -15,7 +15,6 @@ class QuestionsController < ApplicationController
 
   def new
     @question = current_test_questions.build
-    render :new
   end
 
   def create
@@ -37,7 +36,7 @@ class QuestionsController < ApplicationController
   private
 
   def questions_params
-    params.require(:question).permit(:body, :test_id)
+    params.require(:question).permit(:body)
   end
 
   def current_test_questions

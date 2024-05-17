@@ -2,6 +2,6 @@
 
 Rails.application.routes.draw do
   resources :tests do
-    resources :questions, controller: 'questions'
+    resources :questions
   end
 end
