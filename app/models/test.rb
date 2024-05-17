@@ -11,9 +11,15 @@ class Test < ApplicationRecord
   validates :title, presence: true, uniqueness: { scope: :level }
   validates :level, numericality: { only_integer: true }
 
-  scope :by_level, ->(level) { where(level: level) }
+  scope :by_level, ->(level) { where(level:) }
   scope :simple, -> { by_level(0..1) }
   scope :advanced, -> { by_level(2..4) }
   scope :master, -> { by_level(5) }
   scope :by_category, ->(category_name) { joins(:category).where(categories: { title: category_name }) }
+
+  def self.sorted_category_titles
+    Test.joins(:category)
+        .order('categories.title ASC')
+        .pluck('categories.title')
+  end
 end
