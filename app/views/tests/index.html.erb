@@ -1,0 +1,8 @@
+<h1>All Tests</h1>
+<ul>
+  <% @tests.each do |test| %>
+    <li>
+      <%= test.title %> - <%= test.questions.count %> Questions
+    </li>
+  <% end %>
+</ul>
