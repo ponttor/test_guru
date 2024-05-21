@@ -1,3 +1,3 @@
 <h1><%= question_header(@current_test, @question) %></h1>
 <%= render 'form', question: @question %>
-<%= link_to 'Back to Questions', test_questions_path(@current_test) %>
+<%= link_to 'Back to Questions', test_questions_path(@current_test, @question) %>

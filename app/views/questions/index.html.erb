@@ -4,6 +4,7 @@
     <li>
       <%= question.body %> - 
       <%= link_to 'Show', test_question_path(@current_test, question) %> |
+      <%= link_to 'Edit', edit_test_question_path(@current_test, question) %> |
       <%= link_to 'Delete', test_question_path(@current_test, question), method: :delete, data: { confirm: 'Are you sure?' } %>
     </li>
   <% end %>
