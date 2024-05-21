@@ -1,0 +1,10 @@
+<%= form_with model: [@current_test, Question.new], url: test_questions_path(@current_test), local: true do |form| %>
+  <div class="field">
+    <%= form.label :body, "Question Body:" %>
+    <%= form.text_area :body, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Question" %>
+  </div>
+<% end %>
