@@ -2,21 +2,24 @@
 
 class QuestionsController < ApplicationController
   before_action :current_test
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
   def index
-    @questions = @current_test.questions
+    @questions = current_test_questions
   end
 
-  def show; end
+  def show
+    @question = current_test_questions.find(params[:id])
+  end
 
   def new
     @question = current_test_questions.build
   end
 
-  def edit; end
+  def edit
+    @question = current_test_questions.find(params[:id])
+  end
 
   def create
     @question = current_test_questions.build(questions_params)
@@ -30,7 +33,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update!(questions_params)
+    @question = current_test_questions.find(params[:id])
+
+    if @question.update(questions_params)
       redirect_to(test_question_url(@current_test, @question), notice: 'Question was successfully updated.')
     else
       render :edit
@@ -38,15 +43,11 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
+    current_test_questions.find(params[:id]).destroy
     redirect_to(test_questions_path(@current_test), notice: 'Question was successfully deleted.')
   end
 
   private
-
-  def set_question
-    @question = @current_test.questions.find(params[:id])
-  end
 
   def questions_params
     params.require(:question).permit(:body)
