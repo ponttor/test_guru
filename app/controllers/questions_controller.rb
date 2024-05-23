@@ -5,16 +5,16 @@ class QuestionsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
-  def index
-    render inline: '<%= @current_test.questions.map(&:body).join("<br>") %>'
-  end
-
   def show
-    render inline: '<%= @current_test.questions.find(params[:id]).body %>'
+    @question = current_test_question
   end
 
   def new
     @question = current_test_questions.build
+  end
+
+  def edit
+    @question = current_test_question
   end
 
   def create
@@ -28,9 +28,19 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update
+    @question = current_test_question
+
+    if @question.update(questions_params)
+      redirect_to(test_question_url(@current_test, @question), notice: 'Question was successfully updated.')
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    @question.destroy
-    redirect_to test_questions_path(@current_test), notice: 'Question was successfully deleted.'
+    current_test_question.destroy
+    redirect_to(test_questions_path(@current_test), notice: 'Question was successfully deleted.')
   end
 
   private
@@ -41,6 +51,10 @@ class QuestionsController < ApplicationController
 
   def current_test_questions
     @current_test.questions
+  end
+
+  def current_test_question
+    current_test_questions.find(params[:id])
   end
 
   def current_test
